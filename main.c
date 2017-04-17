@@ -1,5 +1,6 @@
 #include <stdio.h>
-#include "test.h"
+#include "list.h"
+#include "stack.h"
 
 /**
  * @brief      Main function
@@ -8,8 +9,6 @@
  *
  * @return     0
  */
-int main()
-{
-    testHeader();
+int main() {
     return 0;
 }
