@@ -2,6 +2,7 @@
 #include <stdlib.h>
 
 #include "list.h"
+#include "cell.h"
 
 /**
  * @brief      Create a List
@@ -21,20 +22,21 @@ List * createList() {
 }
 
 /**
- * @brief      Create a Cell
+ * @brief      Destroy the given list
  *
- *             This funciton will create a new empty cell. The next item will be
- *             set to NULL and the stored data will be set to 0.
+ *             Destroy all cells and free the space of the list.
  *
- * @return     Returns a pointer to a new empty Cell.
+ *             Take care while destroying a list. Remember to set the pointer to
+ *             the destroyed list to NULL to avoid Segmentation Faults.
+ *
+ * @param      list  The list
  */
-Cell * createCell() {
-    Cell *cell = malloc(sizeof(Cell));
+void destroyList(List *list) {
+    for (int i = list->size; i > 0; i--) {
+        destroyCell(removeCellFromList(list, i-1));
+    }
 
-    cell->next = NULL;
-    cell->data = 0;
-
-    return cell;
+    free(list);
 }
 
 /**
@@ -64,7 +66,7 @@ int calculatePotition(int position, int size) {
 }
 
 /**
- * @brief      Insert a Cell
+ * @brief      Insert a Cell on the given List
  *
  *             This function will insert a cell in a determined position of the
  *             given list.
@@ -75,7 +77,7 @@ int calculatePotition(int position, int size) {
  *
  * @return     The position that the cell was inserted
  */
-int insertCell(List *list, Cell *cell, int position) {
+int insertCellOnList(List *list, Cell *cell, int position) {
     int counter = 0;
     Cell *previous = NULL, *current = NULL;
 
@@ -132,7 +134,7 @@ int insertCell(List *list, Cell *cell, int position) {
 }
 
 /**
- * @brief      Removes a Cell
+ * @brief      Removes a Cell from the given List
  *
  *             This function will remove a cell in a determined position of the
  *             given list.
@@ -142,7 +144,7 @@ int insertCell(List *list, Cell *cell, int position) {
  *
  * @return     The removed cell
  */
-Cell * removeCell(List *list, int position) {
+Cell * removeCellFromList(List *list, int position) {
     int counter = 0;
     Cell *previous = NULL, *current = NULL;
 
@@ -219,11 +221,15 @@ Cell * removeCell(List *list, int position) {
  */
 void printList(List *list) {
     int counter = 0;
-    Cell *current = list->first;
 
-    while (counter < list->size) {
-        printf("%d - %d\n", counter, current->data);
-        current = current->next;
-        counter++;
+    if(list) {
+        Cell *current = list->first;
+
+        while (counter < list->size) {
+            printf("Cell %d\n", counter);
+            printCell(current);
+            current = current->next;
+            counter++;
+        }
     }
 }

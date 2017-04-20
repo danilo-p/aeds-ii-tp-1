@@ -1,4 +1,5 @@
 #include "list.h"
+#include "cell.h"
 
 #ifndef STACK_H
 #define STACK_H
@@ -19,9 +20,11 @@ typedef struct stack Stack;
 
 Stack * createStack();
 
-void pushCell(Stack *stack, Cell *cell);
+void destroyStack(Stack *stack);
 
-Cell * popCell(Stack *stack);
+void pushCellOnStack(Stack *stack, Cell *cell);
+
+Cell * popCellFromStack(Stack *stack);
 
 void printStack(Stack *stack);
 

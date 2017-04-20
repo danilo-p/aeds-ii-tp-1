@@ -1,7 +1,9 @@
+#include <stdio.h>
 #include <stdlib.h>
 
 #include "stack.h"
 #include "list.h"
+#include "cell.h"
 
 /**
  * @brief      Creates a empty stack
@@ -22,13 +24,29 @@ Stack * createStack() {
 }
 
 /**
- * @brief      Push a cell on the given stack.
+ * @brief      Destroy the given stack
+ *
+ *             Destroy the list of the stack and free the space.
+ *
+ *             Take care while destroying a stack. Remember to set the pointer
+ *             to the destroyed stack to NULL to avoid Segmentation Faults.
+ *
+ * @param      stack  The stack
+ */
+void destroyStack(Stack *stack) {
+    destroyList(stack->list);
+
+    free(stack);
+}
+
+/**
+ * @brief      Push a cell on the given stack
  *
  * @param      stack  The stack
  * @param      cell   The cell
  */
-void pushCell(Stack *stack, Cell *cell) {
-    insertCell(stack->list, cell, stack->list->size);
+void pushCellOnStack(Stack *stack, Cell *cell) {
+    insertCellOnList(stack->list, cell, stack->list->size);
 }
 
 /**
@@ -38,8 +56,8 @@ void pushCell(Stack *stack, Cell *cell) {
  *
  * @return     The popped cell
  */
-Cell * popCell(Stack *stack) {
-    return removeCell(stack->list, stack->list->size-1);
+Cell * popCellFromStack(Stack *stack) {
+    return removeCellFromList(stack->list, stack->list->size-1);
 }
 
 /**
@@ -48,5 +66,7 @@ Cell * popCell(Stack *stack) {
  * @param      stack  The stack
  */
 void printStack(Stack *stack) {
-    printList(stack->list);
+    if(stack) {
+        printList(stack->list);
+    }
 }

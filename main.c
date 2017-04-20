@@ -16,7 +16,13 @@ int main() {
 
     cell->data = 2;
 
-    pushCell(stack, cell);
+    pushCellOnStack(stack, cell);
+
+    printStack(stack);
+
+    destroyStack(stack);
+
+    stack = NULL;
 
     printStack(stack);
 

@@ -1,19 +1,7 @@
+#include "cell.h"
+
 #ifndef LIST_H
 #define LIST_H
-
-/**
- * @brief      Cell structure
- *
- *             This struct is used on the list as cell.
- */
-struct cell {
-    /** Next cell on the list */
-    struct cell *next;
-    /** Stored data */
-    int data;
-};
-
-typedef struct cell Cell;
 
 /**
  * @brief      List structure
@@ -31,11 +19,11 @@ typedef struct list List;
 
 List * createList();
 
-Cell * createCell();
+void destroyList(List *list);
 
-int insertCell(List *list, Cell *cell, int position);
+int insertCellOnList(List *list, Cell *cell, int position);
 
-Cell * removeCell(List *list, int position);
+Cell * removeCellFromList(List *list, int position);
 
 void printList(List *list);
 
