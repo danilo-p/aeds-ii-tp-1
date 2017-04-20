@@ -1,34 +1,46 @@
-#include "list.h"
 #include <stdio.h>
+#include <stdlib.h>
+
+#include "list.h"
 
 /**
- * @brief      Initialize a List
- * 
- * This function initialize a empty list. The first item and size is set to NULL and 0, respectively.
+ * @brief      Create a List
  *
- * @param      list  The list that will be initialized.
+ *             This function create a empty list. The first item and size is set
+ *             to NULL and 0, respectively.
+ *
+ * @return     Returns a pointer to a new empty List.
  */
-void initializeList(List *list) {
+List * createList() {
+    List *list = malloc(sizeof(List));
+
     list->first = NULL;
     list->size = 0;
+
+    return list;
 }
 
 /**
- * @brief      Initialize a Cell
- * 
- * This funciton will initialize a new empty cell. The next item will be set to NULL and the stored data will be set to 0.
+ * @brief      Create a Cell
  *
- * @param      cell  The cell that will be initialized.
+ *             This funciton will create a new empty cell. The next item will be
+ *             set to NULL and the stored data will be set to 0.
+ *
+ * @return     Returns a pointer to a new empty Cell.
  */
-void initializeCell(Cell *cell) {
+Cell * createCell() {
+    Cell *cell = malloc(sizeof(Cell));
+
     cell->next = NULL;
     cell->data = 0;
+
+    return cell;
 }
 
 /**
  * @brief      Calculates the potition.
- * 
- * Calculates the position of something based on the size.
+ *
+ *             Calculates the position of something based on the size.
  *
  * @param[in]  position  The position
  * @param[in]  size      The size
@@ -53,8 +65,9 @@ int calculatePotition(int position, int size) {
 
 /**
  * @brief      Insert a Cell
- * 
- * This function will insert a cell in a determined position of the given list.
+ *
+ *             This function will insert a cell in a determined position of the
+ *             given list.
  *
  * @param      list      List to insert the given cell
  * @param      cell      The cell
@@ -116,8 +129,9 @@ void insertCell(List *list, Cell *cell, int position) {
 
 /**
  * @brief      Removes a Cell
- * 
- * This function will remove a cell in a determined position of the given list.
+ *
+ *             This function will remove a cell in a determined position of the
+ *             given list.
  *
  * @param      list      The list
  * @param[in]  position  The position of the cell to be removed
@@ -189,16 +203,17 @@ void removeCell(List *list, int position) {
 
 /**
  * @brief      Print a List
- * 
- * This function will print the content of a list. It prints the position and the data of each cell.
  *
- * @param[in]  list  The list
+ *             This function will print the content of a list. It prints the
+ *             position and the data of each cell.
+ *
+ * @param[in]  list  Pointer to the list
  */
-void printList(List list) {
+void printList(List *list) {
     int counter = 0;
-    Cell *current = list.first;
+    Cell *current = list->first;
 
-    while (counter < list.size) {
+    while (counter < list->size) {
         printf("%d - %d\n", counter, current->data);
         current = current->next;
         counter++;

@@ -3,8 +3,8 @@
 
 /**
  * @brief      Cell structure
- * 
- * This struct is used on the list as cell.
+ *
+ *             This struct is used on the list as cell.
  */
 struct cell {
     /** Next cell on the list */
@@ -17,8 +17,8 @@ typedef struct cell Cell;
 
 /**
  * @brief      List structure
- * 
- * This will be the structure of the list.
+ *
+ *             This will be the structure of the list.
  */
 struct list {
     /** Pointer to the first item on the list */
@@ -29,14 +29,14 @@ struct list {
 
 typedef struct list List;
 
-void initializeList(List *list);
+List * createList();
 
-void initializeCell(Cell *cell);
+Cell * createCell();
 
 void insertCell(List *list, Cell *cell, int position);
 
 void removeCell(List *list, int position);
 
-void printList(List list);
+void printList(List *list);
 
 #endif
