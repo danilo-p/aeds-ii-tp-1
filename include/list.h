@@ -33,9 +33,9 @@ List * createList();
 
 Cell * createCell();
 
-void insertCell(List *list, Cell *cell, int position);
+int insertCell(List *list, Cell *cell, int position);
 
-void removeCell(List *list, int position);
+Cell * removeCell(List *list, int position);
 
 void printList(List *list);
 

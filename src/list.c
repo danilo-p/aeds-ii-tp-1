@@ -72,8 +72,10 @@ int calculatePotition(int position, int size) {
  * @param      list      List to insert the given cell
  * @param      cell      The cell
  * @param[in]  position  Position that the cell will be inserted
+ *
+ * @return     The position that the cell was inserted
  */
-void insertCell(List *list, Cell *cell, int position) {
+int insertCell(List *list, Cell *cell, int position) {
     int counter = 0;
     Cell *previous = NULL, *current = NULL;
 
@@ -125,6 +127,8 @@ void insertCell(List *list, Cell *cell, int position) {
     }
 
     list->size++;
+
+    return position;
 }
 
 /**
@@ -135,8 +139,10 @@ void insertCell(List *list, Cell *cell, int position) {
  *
  * @param      list      The list
  * @param[in]  position  The position of the cell to be removed
+ *
+ * @return     The removed cell
  */
-void removeCell(List *list, int position) {
+Cell * removeCell(List *list, int position) {
     int counter = 0;
     Cell *previous = NULL, *current = NULL;
 
@@ -199,6 +205,8 @@ void removeCell(List *list, int position) {
     if(list->size > 0) {
         list->size--;
     }
+
+    return current;
 }
 
 /**

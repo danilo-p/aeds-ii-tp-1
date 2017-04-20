@@ -17,11 +17,11 @@ struct stack {
 
 typedef struct stack Stack;
 
-void createStack(Stack *stack);
+Stack * createStack();
 
 void pushCell(Stack *stack, Cell *cell);
 
-void popCell(Stack *stack);
+Cell * popCell(Stack *stack);
 
 void printStack(Stack *stack);
 

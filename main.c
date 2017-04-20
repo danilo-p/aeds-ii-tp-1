@@ -11,12 +11,14 @@
  * @return     0
  */
 int main() {
-    List *list = createList();
+    Stack *stack = createStack();
     Cell *cell = createCell();
 
-    insertCell(list, cell, 0);
+    cell->data = 2;
 
-    printList(list);
+    pushCell(stack, cell);
+
+    printStack(stack);
 
     return 0;
 }
