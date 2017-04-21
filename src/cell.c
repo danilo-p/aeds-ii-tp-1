@@ -9,13 +9,15 @@
  *             This funciton will create a new empty cell. The next item will be
  *             set to NULL and the stored data will be set to 0.
  *
+ * @param[in]  data  The data
+ *
  * @return     Returns a pointer to a new empty Cell.
  */
-Cell * createCell() {
+Cell * createCell(int data) {
     Cell *cell = malloc(sizeof(Cell));
 
     cell->next = NULL;
-    cell->data = 0;
+    cell->data = data;
 
     return cell;
 }

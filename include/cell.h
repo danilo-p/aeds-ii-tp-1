@@ -15,7 +15,7 @@ struct cell {
 
 typedef struct cell Cell;
 
-Cell * createCell();
+Cell * createCell(int data);
 
 void destroyCell(Cell *cell);
 

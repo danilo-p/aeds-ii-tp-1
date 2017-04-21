@@ -1,30 +1,49 @@
 #include <stdio.h>
 
 #include "list.h"
-#include "stack.h"
+#include "queue.h"
 
 /**
  * @brief      Main function
- * 
- * This is the main function of the project.
+ *
+ *             This is the main function of the project.
  *
  * @return     0
  */
 int main() {
-    Stack *stack = createStack();
-    Cell *cell = createCell();
+    printf("Start\n");
 
-    cell->data = 2;
+    printf("\nInitial Queue\n");
 
-    pushCellOnStack(stack, cell);
+    Queue *queue = createQueue();
 
-    printStack(stack);
+    pushCellOnQueue(queue, createCell(1));
+    pushCellOnQueue(queue, createCell(2));
+    pushCellOnQueue(queue, createCell(3));
+    pushCellOnQueue(queue, createCell(4));
+    pushCellOnQueue(queue, createCell(5));
+    pushCellOnQueue(queue, createCell(6));
 
-    destroyStack(stack);
+    printQueue(queue);
 
-    stack = NULL;
+    printf("\nRemoving Elements\n");
 
-    printStack(stack);
+    destroyCell(popCellFromQueue(queue));
+    destroyCell(popCellFromQueue(queue));
+    destroyCell(popCellFromQueue(queue));
+
+    printQueue(queue);
+
+    printf("\nInserting Elements\n");
+    pushCellOnQueue(queue, createCell(7));
+    pushCellOnQueue(queue, createCell(8));
+    pushCellOnQueue(queue, createCell(9));
+
+    printQueue(queue);
+
+    destroyQueue(queue);
+
+    printf("\nEnd\n");
 
     return 0;
 }
