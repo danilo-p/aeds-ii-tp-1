@@ -9,11 +9,11 @@
  *             This funciton will create a new empty cell. The next item will be
  *             set to NULL and the stored data will be set to 0.
  *
- * @param[in]  data  The data
+ * @param[in]  data  Pointer to the data
  *
  * @return     Returns a pointer to a new empty Cell.
  */
-Cell * createCell(int data) {
+Cell * createCell(void *data) {
     Cell *cell = malloc(sizeof(Cell));
 
     cell->next = NULL;
@@ -32,15 +32,4 @@ Cell * createCell(int data) {
  */
 void destroyCell(Cell *cell) {
     free(cell);
-}
-
-/**
- * @brief      Print the given cell
- *
- * @param      cell  The cell
- */
-void printCell(Cell *cell) {
-    if(cell) {
-        printf("data: %d\n", cell->data);
-    }
 }

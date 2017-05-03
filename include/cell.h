@@ -10,15 +10,13 @@ struct cell {
     /** Next cell on the list */
     struct cell *next;
     /** Stored data */
-    int data;
+    void *data;
 };
 
 typedef struct cell Cell;
 
-Cell * createCell(int data);
+Cell * createCell(void *data);
 
 void destroyCell(Cell *cell);
-
-void printCell(Cell *cell);
 
 #endif

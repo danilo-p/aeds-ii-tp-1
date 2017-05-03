@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 
 #include "queue.h"
 
@@ -16,12 +17,14 @@ int main() {
 
     Queue *queue = createQueue();
 
-    pushCellOnQueue(queue, createCell(1));
-    pushCellOnQueue(queue, createCell(2));
-    pushCellOnQueue(queue, createCell(3));
-    pushCellOnQueue(queue, createCell(4));
-    pushCellOnQueue(queue, createCell(5));
-    pushCellOnQueue(queue, createCell(6));
+    char data[] = "Danilo Pimentel";
+
+    pushCellOnQueue(queue, createCell((void *) &(data)));
+    pushCellOnQueue(queue, createCell((void *) &(data)));
+    pushCellOnQueue(queue, createCell((void *) &(data)));
+    pushCellOnQueue(queue, createCell((void *) &(data)));
+    pushCellOnQueue(queue, createCell((void *) &(data)));
+    pushCellOnQueue(queue, createCell((void *) &(data)));
 
     printQueue(queue);
 
@@ -34,9 +37,9 @@ int main() {
     printQueue(queue);
 
     printf("\nInserting Elements\n");
-    pushCellOnQueue(queue, createCell(7));
-    pushCellOnQueue(queue, createCell(8));
-    pushCellOnQueue(queue, createCell(9));
+    pushCellOnQueue(queue, createCell((void *) &(data)));
+    pushCellOnQueue(queue, createCell((void *) &(data)));
+    pushCellOnQueue(queue, createCell((void *) &(data)));
 
     printQueue(queue);
 

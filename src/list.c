@@ -226,8 +226,7 @@ void printList(List *list) {
         Cell *current = list->first;
 
         while (counter < list->size) {
-            printf("Cell %d - ", counter);
-            printCell(current);
+            printf("Cell %d\n", counter);
             current = current->next;
             counter++;
         }
