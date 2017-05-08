@@ -12,13 +12,15 @@
 struct stack {
     /** List that is used to store the stack elements */
     List *list;
-    /** Maximum size of the stack */
-    int max_size;
+    /** Maximum size of the stack. Negative means no maximum size. */
+    int maxSize;
 };
 
 typedef struct stack Stack;
 
-Stack * createStack();
+Stack * createStack(int maxSize);
+
+void createStacks(Stack *stacks[], int length, int maxSize);
 
 void destroyStack(Stack *stack);
 

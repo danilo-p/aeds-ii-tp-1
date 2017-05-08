@@ -12,13 +12,15 @@
 struct queue {
     /** List that is used to store the queue elements */
     List *list;
-    /** Maximum size of the queue */
-    int max_size;
+    /** Maximum size of the queue. Negative means no maximum size. */
+    int maxSize;
 };
 
 typedef struct queue Queue;
 
-Queue * createQueue();
+Queue * createQueue(int maxSize);
+
+void createQueues(Queue *queues[], int length, int maxSize);
 
 void destroyQueue(Queue *queue);
 

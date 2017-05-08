@@ -9,18 +9,35 @@
  * @brief      Creates a empty queue
  *
  *             This function create a empty queue with an empty list and the
- *             given max_size. If the max_size specified is less than 0, the
- *             queue dont have limit.
+ *             given maxSize. If the maxSize specified is less than 0, the queue
+ *             dont have limit.
+ *
+ * @param[in]  maxSize  The maximum size of the Queue
  *
  * @return     Pointer to the created queue
  */
-Queue * createQueue() {
+Queue * createQueue(int maxSize) {
     Queue *queue = malloc(sizeof(Queue));
 
     queue->list = createList();
-    queue->max_size = -1;
+    queue->maxSize = maxSize;
 
     return queue;
+}
+
+/**
+ * @brief      Create empty queues on the given array
+ *
+ * @param      queues   The queues
+ * @param[in]  length   The length of the queues array
+ * @param[in]  maxSize  The maximum size of the queue
+ */
+void createQueues(Queue *queues[], int length, int maxSize) {
+    int i;
+
+    for(i = 0; i < length; i++) {
+        queues[i] = createQueue(maxSize);
+    }
 }
 
 /**
@@ -46,7 +63,9 @@ void destroyQueue(Queue *queue) {
  * @param      cell   The cell
  */
 void pushCellOnQueue(Queue *queue, Cell *cell) {
-    insertCellOnList(queue->list, cell, queue->list->size);
+    if (queue->maxSize < 0 || queue->list->size < queue->maxSize) {
+        insertCellOnList(queue->list, cell, queue->list->size);
+    }
 }
 
 /**

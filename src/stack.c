@@ -9,18 +9,35 @@
  * @brief      Creates a empty stack
  *
  *             This function create a empty stack with an empty list and the
- *             given max_size. If the max_size specified is less than 0, the
- *             stack dont have limit.
+ *             given maxSize. If the maxSize specified is less than 0, the stack
+ *             dont have limit.
+ *
+ * @param[in]  maxSize  The maximum size of the Stack
  *
  * @return     Pointer to the created stack
  */
-Stack * createStack() {
+Stack * createStack(int maxSize) {
     Stack *stack = malloc(sizeof(Stack));
 
     stack->list = createList();
-    stack->max_size = -1;
+    stack->maxSize = maxSize;
 
     return stack;
+}
+
+/**
+ * @brief      Create empty stacks on the given array
+ *
+ * @param      stacks   The stacks array
+ * @param[in]  length   The length of the array
+ * @param[in]  maxSize  The maximum size of the stack
+ */
+void createStacks(Stack *stacks[], int length, int maxSize) {
+    int i;
+
+    for(i = 0; i < length; i++) {
+        stacks[i] = createStack(maxSize);
+    }
 }
 
 /**
@@ -46,7 +63,9 @@ void destroyStack(Stack *stack) {
  * @param      cell   The cell
  */
 void pushCellOnStack(Stack *stack, Cell *cell) {
-    insertCellOnList(stack->list, cell, stack->list->size);
+    if (stack->maxSize < 0 || stack->list->size < stack->maxSize) {
+        insertCellOnList(stack->list, cell, stack->list->size);
+    }
 }
 
 /**
