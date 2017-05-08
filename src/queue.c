@@ -57,6 +57,20 @@ void destroyQueue(Queue *queue) {
 }
 
 /**
+ * @brief      Destroy all the queues from the given array
+ *
+ * @param      queues  The queues array
+ * @param[in]  length  The length of the array
+ */
+void destroyQueues(Queue *queues[], int length) {
+    int i;
+
+    for(i = 0; i < length; i++) {
+        destroyQueue(queues[i]);
+    }
+}
+
+/**
  * @brief      Push a cell on the given queue
  *
  * @param      queue  The queue
@@ -88,4 +102,45 @@ void printQueue(Queue *queue) {
     if(queue) {
         printList(queue->list);
     }
+}
+
+/**
+ * @brief      Spread the queue's cells on a group of other queues
+ * 
+ *             This function consumes the queue and pushes the cells on the queues
+ *             on the order that they arrive on the queues array.
+ *
+ * @param      queue         The queue to be spreaded
+ * @param      queues        The queues group
+ * @param[in]  queuesLength  The queues group length
+ */
+void spreadQueueOnQueues(Queue *queue, Queue *queues[], int queuesLength) {
+    int queuesIndex = 0;
+    while (queue->list->size > 0) {
+        pushCellOnQueue(queues[queuesIndex], popCellFromQueue(queue));
+        queuesIndex = queuesIndex < queuesLength ? queuesIndex + 1 : 0;
+    }
+}
+
+/**
+ * @brief      Pick cells from the given queues
+ *
+ * This function pops the first cell of queues and mount a queue with them
+ *
+ * @param      queues  The queues array
+ * @param[in]  length  The length of the queues array
+ *
+ * @return     The queue with the picked cells
+ */
+Queue * pickCellsfromQueues(Queue *queues[], int length) {
+    Queue *crop = createQueue(length);
+
+    for (int i = 0; i < length; i++) {
+        Cell *picked = NULL;
+        if( (picked = popCellFromQueue(queues[i])) != NULL) {
+            pushCellOnQueue(crop, picked);
+        }
+    }
+
+    return crop;
 }

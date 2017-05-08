@@ -57,6 +57,20 @@ void destroyStack(Stack *stack) {
 }
 
 /**
+ * @brief      Destroy all the stacks from the given array
+ *
+ * @param      stacks  The stacks array
+ * @param[in]  length  The length of the array
+ */
+void destroyStacks(Stack *stacks[], int length) {
+    int i;
+
+    for(i = 0; i < length; i++) {
+        destroyStack(stacks[i]);
+    }
+}
+
+/**
  * @brief      Push a cell on the given stack
  *
  * @param      stack  The stack

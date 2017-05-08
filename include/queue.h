@@ -24,10 +24,16 @@ void createQueues(Queue *queues[], int length, int maxSize);
 
 void destroyQueue(Queue *queue);
 
+void destroyQueues(Queue *queues[], int length);
+
 void pushCellOnQueue(Queue *queue, Cell *cell);
 
 Cell * popCellFromQueue(Queue *queue);
 
 void printQueue(Queue *queue);
+
+void spreadQueueOnQueues(Queue *queue, Queue *queues[], int queuesLength);
+
+Queue * pickCellsfromQueues(Queue *queues[], int length);
 
 #endif

@@ -47,9 +47,9 @@ int main() {
     // Intervalo de reposição de bandejas
     int TRAY_REFILL_INTERVAL    = 12;
     // Intervalo de chegada de novos usuários
-    int USER_ARRIVAL_INTERVAL   = 2;
+    int USER_ARRIVAL_INTERVAL   = 1;
     // Quantidade de usuários que chegam a cada intervalo
-    int USER_REFILL_AMOUNT      = 4;
+    int USER_REFILL_AMOUNT      = 2;
     // Tempo gasto para pegar uma bandeja
     int TRAY_DELAY              = 1;
     // Tempo gasto para servir um tipo de comida
@@ -68,47 +68,23 @@ int main() {
     int instant;
 
     for(instant = 0; instant < DURATION; instant++) {
+        // User arrival
         if (instant % USER_ARRIVAL_INTERVAL == 0) {
             insertNewUsers(checkoutQueues, CHECKOUT_QUEUE_AMOUNT,
                 USER_REFILL_AMOUNT, instant);
         }
+
+        // Checkout service
+        if (instant % CHECKOUT_DELAY == 0) {
+            spreadQueueOnQueues(
+                pickCellsfromQueues(checkoutQueues, CHECKOUT_QUEUE_AMOUNT),
+                trayQueues, TRAY_QUEUE_AMOUNT);
+        }
     }
 
-    // printf("Start\n");
-
-    // printf("\nInitial Queue\n");
-
-    // Queue *queue = createQueue();
-
-    // char data[] = "Danilo Pimentel";
-
-    // pushCellOnQueue(queue, createCell((void *) &(data)));
-    // pushCellOnQueue(queue, createCell((void *) &(data)));
-    // pushCellOnQueue(queue, createCell((void *) &(data)));
-    // pushCellOnQueue(queue, createCell((void *) &(data)));
-    // pushCellOnQueue(queue, createCell((void *) &(data)));
-    // pushCellOnQueue(queue, createCell((void *) &(data)));
-
-    // printQueue(queue);
-
-    // printf("\nRemoving Elements\n");
-
-    // destroyCell(popCellFromQueue(queue));
-    // destroyCell(popCellFromQueue(queue));
-    // destroyCell(popCellFromQueue(queue));
-
-    // printQueue(queue);
-
-    // printf("\nInserting Elements\n");
-    // pushCellOnQueue(queue, createCell((void *) &(data)));
-    // pushCellOnQueue(queue, createCell((void *) &(data)));
-    // pushCellOnQueue(queue, createCell((void *) &(data)));
-
-    // printQueue(queue);
-
-    // destroyQueue(queue);
-
-    // printf("\nEnd\n");
+    destroyQueues(checkoutQueues, CHECKOUT_QUEUE_AMOUNT);
+    destroyQueues(trayQueues, TRAY_QUEUE_AMOUNT);
+    destroyStacks(trayStacks, TRAY_STACK_AMOUNT);
 
     return 0;
 }

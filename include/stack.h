@@ -24,6 +24,8 @@ void createStacks(Stack *stacks[], int length, int maxSize);
 
 void destroyStack(Stack *stack);
 
+void destroyStacks(Stack *stacks[], int length);
+
 void pushCellOnStack(Stack *stack, Cell *cell);
 
 Cell * popCellFromStack(Stack *stack);
