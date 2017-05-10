@@ -17,6 +17,8 @@ typedef struct cell Cell;
 
 Cell * createCell(void *data);
 
-void destroyCell(Cell *cell);
+void destroyCell(Cell *cell, void (* destructor)(void *));
+
+void printCell(Cell *cell, void (* print)(void *));
 
 #endif

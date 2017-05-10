@@ -30,3 +30,6 @@ clean:
 
 docs:
 	doxygen
+
+valgrind:
+	valgrind --track-origins=yes --leak-check=full --show-leak-kinds=all ./$(BIN_DIR)/main

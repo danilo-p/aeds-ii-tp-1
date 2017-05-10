@@ -22,14 +22,14 @@ Stack * createStack(int maxSize);
 
 void createStacks(Stack *stacks[], int length, int maxSize);
 
-void destroyStack(Stack *stack);
+void destroyStack(Stack *stack, void (* destructor)(void *));
 
-void destroyStacks(Stack *stacks[], int length);
+void destroyStacks(Stack *stacks[], int length, void (* destructor)(void *));
 
 void pushCellOnStack(Stack *stack, Cell *cell);
 
 Cell * popCellFromStack(Stack *stack);
 
-void printStack(Stack *stack);
+void printStack(Stack *stack, void (* print)(void *));
 
 #endif

@@ -19,12 +19,12 @@ typedef struct list List;
 
 List * createList();
 
-void destroyList(List *list);
+void destroyList(List *list, void (* destructor)(void *));
 
 int insertCellOnList(List *list, Cell *cell, int position);
 
 Cell * removeCellFromList(List *list, int position);
 
-void printList(List *list);
+void printList(List *list, void (* print)(void *));
 
 #endif

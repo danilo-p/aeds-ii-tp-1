@@ -48,10 +48,11 @@ void createQueues(Queue *queues[], int length, int maxSize) {
  *             Take care while destroying a queue. Remember to set the pointer
  *             to the destroyed queue to NULL to avoid Segmentation Faults.
  *
- * @param      queue  The queue
+ * @param      queue       The queue
+ * @param[in]  destructor  The destructor
  */
-void destroyQueue(Queue *queue) {
-    destroyList(queue->list);
+void destroyQueue(Queue *queue, void (* destructor)(void *)) {
+    destroyList(queue->list, destructor);
 
     free(queue);
 }
@@ -59,14 +60,15 @@ void destroyQueue(Queue *queue) {
 /**
  * @brief      Destroy all the queues from the given array
  *
- * @param      queues  The queues array
- * @param[in]  length  The length of the array
+ * @param      queues      The queues array
+ * @param[in]  length      The length of the array
+ * @param[in]  destructor  The destructor
  */
-void destroyQueues(Queue *queues[], int length) {
+void destroyQueues(Queue *queues[], int length, void (* destructor)(void *)) {
     int i;
 
     for(i = 0; i < length; i++) {
-        destroyQueue(queues[i]);
+        destroyQueue(queues[i], destructor);
     }
 }
 
@@ -77,6 +79,10 @@ void destroyQueues(Queue *queues[], int length) {
  * @param      cell   The cell
  */
 void pushCellOnQueue(Queue *queue, Cell *cell) {
+    if(cell == NULL) {
+        printf("\n\n\n\nQUE PRAGA\n\n\n\n");
+    }
+
     if (queue->maxSize < 0 || queue->list->size < queue->maxSize) {
         insertCellOnList(queue->list, cell, queue->list->size);
     }
@@ -97,10 +103,20 @@ Cell * popCellFromQueue(Queue *queue) {
  * @brief      Print the given queue
  *
  * @param      queue  The queue
+ * @param[in]  print  The function for printing the queue cell's data
  */
-void printQueue(Queue *queue) {
+void printQueue(Queue *queue, void (* print)(void *)) {
     if(queue) {
-        printList(queue->list);
+        printList(queue->list, print);
+    }
+}
+
+void printQueues(Queue *queues[], int length, void (* print)(void *)) {
+    int i;
+
+    for (i = 0; i < length; ++i) {
+        printf("\nQueue %d\n\n", i);
+        printQueue(queues[i], print);
     }
 }
 
@@ -117,8 +133,9 @@ void printQueue(Queue *queue) {
 void spreadQueueOnQueues(Queue *queue, Queue *queues[], int queuesLength) {
     int queuesIndex = 0;
     while (queue->list->size > 0) {
-        pushCellOnQueue(queues[queuesIndex], popCellFromQueue(queue));
-        queuesIndex = queuesIndex < queuesLength ? queuesIndex + 1 : 0;
+        Cell *aux = popCellFromQueue(queue);
+        pushCellOnQueue(queues[queuesIndex%queuesLength], aux);
+        queuesIndex++;
     }
 }
 

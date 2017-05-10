@@ -22,15 +22,17 @@ Queue * createQueue(int maxSize);
 
 void createQueues(Queue *queues[], int length, int maxSize);
 
-void destroyQueue(Queue *queue);
+void destroyQueue(Queue *queue, void (* destructor)(void *));
 
-void destroyQueues(Queue *queues[], int length);
+void destroyQueues(Queue *queues[], int length, void (* destructor)(void *));
 
 void pushCellOnQueue(Queue *queue, Cell *cell);
 
 Cell * popCellFromQueue(Queue *queue);
 
-void printQueue(Queue *queue);
+void printQueue(Queue *queue, void (* print)(void *));
+
+void printQueues(Queue *queues[], int length, void (* print)(void *));
 
 void spreadQueueOnQueues(Queue *queue, Queue *queues[], int queuesLength);
 

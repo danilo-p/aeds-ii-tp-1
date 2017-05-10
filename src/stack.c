@@ -48,10 +48,11 @@ void createStacks(Stack *stacks[], int length, int maxSize) {
  *             Take care while destroying a stack. Remember to set the pointer
  *             to the destroyed stack to NULL to avoid Segmentation Faults.
  *
- * @param      stack  The stack
+ * @param      stack       The stack
+ * @param[in]  destructor  The destructor
  */
-void destroyStack(Stack *stack) {
-    destroyList(stack->list);
+void destroyStack(Stack *stack, void (* destructor)(void *)) {
+    destroyList(stack->list, destructor);
 
     free(stack);
 }
@@ -59,14 +60,15 @@ void destroyStack(Stack *stack) {
 /**
  * @brief      Destroy all the stacks from the given array
  *
- * @param      stacks  The stacks array
- * @param[in]  length  The length of the array
+ * @param      stacks      The stacks array
+ * @param[in]  length      The length of the array
+ * @param[in]  destructor  The destructor
  */
-void destroyStacks(Stack *stacks[], int length) {
+void destroyStacks(Stack *stacks[], int length, void (* destructor)(void *)) {
     int i;
 
     for(i = 0; i < length; i++) {
-        destroyStack(stacks[i]);
+        destroyStack(stacks[i], destructor);
     }
 }
 
@@ -97,9 +99,10 @@ Cell * popCellFromStack(Stack *stack) {
  * @brief      Print the given stack
  *
  * @param      stack  The stack
+ * @param[in]  print  The function for printing the cell data
  */
-void printStack(Stack *stack) {
+void printStack(Stack *stack, void (* print)(void *)) {
     if(stack) {
-        printList(stack->list);
+        printList(stack->list, print);
     }
 }

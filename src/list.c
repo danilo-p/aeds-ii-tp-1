@@ -29,15 +29,17 @@ List * createList() {
  *             Take care while destroying a list. Remember to set the pointer to
  *             the destroyed list to NULL to avoid Segmentation Faults.
  *
- * @param      list  The list
+ * @param      list        The list
+ * @param[in]  destructor  The destructor for the cells data
  */
-void destroyList(List *list) {
+void destroyList(List *list, void (* destructor)(void *)) {
     for (int i = list->size; i > 0; i--) {
-        destroyCell(removeCellFromList(list, i-1));
+        destroyCell(removeCellFromList(list, i-1), destructor);
     }
 
     free(list);
 }
+
 
 /**
  * @brief      Calculates the potition.
@@ -217,9 +219,10 @@ Cell * removeCellFromList(List *list, int position) {
  *             This function will print the content of a list. It prints the
  *             position and the data of each cell.
  *
- * @param[in]  list  Pointer to the list
+ * @param[in]  list   Pointer to the list
+ * @param[in]  print  The function for printing the cell data
  */
-void printList(List *list) {
+void printList(List *list, void (* print)(void *)) {
     int counter = 0;
 
     if(list) {
@@ -227,6 +230,7 @@ void printList(List *list) {
 
         while (counter < list->size) {
             printf("Cell %d\n", counter);
+            printCell(current, print);
             current = current->next;
             counter++;
         }

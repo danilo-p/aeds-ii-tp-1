@@ -28,8 +28,20 @@ Cell * createCell(void *data) {
  *             Take care while destroying a cell. Remember to set the pointer to
  *             the destroyed cell to NULL to avoid Segmentation Faults.
  *
- * @param      cell  The cell
+ * @param      cell        The cell
+ * @param[in]  destructor  The destructor for the cell data
  */
-void destroyCell(Cell *cell) {
+void destroyCell(Cell *cell, void (* destructor)(void *)) {
+    destructor(cell->data);
     free(cell);
+}
+
+/**
+ * @brief      Print the cell
+ *
+ * @param      cell   The cell
+ * @param[in]  print  The function for printing the cell data
+ */
+void printCell(Cell *cell, void (* print)(void *)) {
+    print(cell->data);
 }
