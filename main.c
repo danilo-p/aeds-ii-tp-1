@@ -17,6 +17,7 @@
  */
 int main() {
     Seed *seed = createSeed(0);
+    Queue *checkout = createQueue(CHECKOUT_QUEUE_AMOUNT);
     Queue *checkoutQueues[CHECKOUT_QUEUE_AMOUNT];
     Queue *trayQueues[TRAY_QUEUE_AMOUNT];
 
@@ -34,15 +35,18 @@ int main() {
 
         // Checkout service
         if (instant % CHECKOUT_DELAY == 0) {
-            Queue *picked = pickCellsfromQueues(checkoutQueues, CHECKOUT_QUEUE_AMOUNT);
-            spreadQueueOnQueues(picked, trayQueues, TRAY_QUEUE_AMOUNT);
-            destroyQueue(picked, destroyUser);
+            // Remove users from the checkout
+            spreadQueueOnQueues(checkout, trayQueues, TRAY_QUEUE_AMOUNT);
+
+            // Add the next users on the checkout
+            pickCellsfromQueues(checkout, checkoutQueues, CHECKOUT_QUEUE_AMOUNT);
         }
     }
 
+    destroySeed(seed);
+    destroyQueue(checkout, destroyUser);
     destroyQueues(checkoutQueues, CHECKOUT_QUEUE_AMOUNT, destroyUser);
     destroyQueues(trayQueues, TRAY_QUEUE_AMOUNT, destroyUser);
-    destroySeed(seed);
 
     return 0;
 }

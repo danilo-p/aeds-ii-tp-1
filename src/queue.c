@@ -142,22 +142,18 @@ void spreadQueueOnQueues(Queue *queue, Queue *queues[], int queuesLength) {
 /**
  * @brief      Pick cells from the given queues
  *
- * This function pops the first cell of queues and mount a queue with them
+ *             This function pops the first cell of queues and add on the given
+ *             queue
  *
+ * @param      dest    The destination
  * @param      queues  The queues array
  * @param[in]  length  The length of the queues array
- *
- * @return     The queue with the picked cells
  */
-Queue * pickCellsfromQueues(Queue *queues[], int length) {
-    Queue *crop = createQueue(length);
-
+void pickCellsfromQueues(Queue *dest, Queue *queues[], int length) {
     for (int i = 0; i < length; i++) {
         Cell *picked = NULL;
         if( (picked = popCellFromQueue(queues[i])) != NULL) {
-            pushCellOnQueue(crop, picked);
+            pushCellOnQueue(dest, picked);
         }
     }
-
-    return crop;
 }

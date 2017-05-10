@@ -36,6 +36,6 @@ void printQueues(Queue *queues[], int length, void (* print)(void *));
 
 void spreadQueueOnQueues(Queue *queue, Queue *queues[], int queuesLength);
 
-Queue * pickCellsfromQueues(Queue *queues[], int length);
+void pickCellsfromQueues(Queue *dest, Queue *queues[], int length);
 
 #endif
