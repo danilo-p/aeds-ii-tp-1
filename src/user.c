@@ -1,9 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#include "stack.h"
 #include "user.h"
 #include "seed.h"
 #include "queue.h"
+#include "cell.h"
 
 /**
  * @brief      Creates an user.
@@ -18,6 +20,7 @@ User * createUser(unsigned int id, int creationInstant) {
 
     newUser->id = id;
     newUser->creationInstant = creationInstant;
+    newUser->finishedInstant = creationInstant;
 
     return newUser;
 }
@@ -25,13 +28,17 @@ User * createUser(unsigned int id, int creationInstant) {
 /**
  * @brief      Function for printing user data
  *
- * @param      user  The user
+ * @param      data  The user in void *
  */
-void printUser(void * user) {
-    User *aux = (User *) user;
+void printUser(void *data) {
+    User *user = (User *) data;
 
-    printf("id: %d\n", aux->id);
-    printf("creationInstant: %d\n", aux->creationInstant);
+    printf("(User)\n");
+    printf("id: %d\n", user->id);
+    printf("creationInstant: %d\n", user->creationInstant);
+    if(user->finishedInstant != user->creationInstant) {
+        printf("finishedInstant: %d\n", user->finishedInstant);
+    }
 }
 
 /**
@@ -57,21 +64,19 @@ void insertNewUser(Queue *queue, User *newUser) {
  */
 void insertNewUsers(Queue *queues[], int length, int newUsersAmount,
         int creationInstant, Seed *seed) {
-    int i = 0, j;
+    int i = 0;
 
     while(newUsersAmount > 0) {
 
         int lessUsedQueue = 0;
-        for(j = 0; j < length; j++) {
-            if(queues[lessUsedQueue]->list->size > queues[j]->list->size) {
-                lessUsedQueue = j;
+        for(i = 0; i < length; i++) {
+            if(queues[lessUsedQueue]->list->size > queues[i]->list->size) {
+                lessUsedQueue = i;
             }
         }
 
         insertNewUser(queues[lessUsedQueue], createUser(createId(seed), creationInstant));
         newUsersAmount--;
-
-        i++;
     }
 }
 
@@ -83,4 +88,33 @@ void insertNewUsers(Queue *queues[], int length, int newUsersAmount,
 void destroyUser(void *data) {
     User *user = (User *) data;
     free(user);
+}
+
+/**
+ * @brief      Gets the time user spent average
+ *
+ * @param      users      The users
+ * @param[in]  timeStart  The time start
+ *
+ * @return     The time user spent average
+ */
+float getTimeUserSpentAverage(Queue **users, int timeStart) {
+    Queue *aux = createQueue((*users)->maxSize);
+    int sum = 0;
+
+    while(!isQueueEmpty(*users)) {
+        Cell *userCell = popCellFromQueue(*users);
+
+        User *user = (User *) userCell->data;
+
+        sum += user->finishedInstant - user->creationInstant;
+
+        pushCellOnQueue(aux, userCell);
+    }
+
+    destroyQueue(*users, destroyUser);
+
+    *users = aux;
+
+    return (float) sum/aux->list->size;
 }

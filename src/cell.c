@@ -32,7 +32,9 @@ Cell * createCell(void *data) {
  * @param[in]  destructor  The destructor for the cell data
  */
 void destroyCell(Cell *cell, void (* destructor)(void *)) {
-    destructor(cell->data);
+    if(cell->data) { 
+        destructor(cell->data);
+    }
     free(cell);
 }
 

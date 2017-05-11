@@ -73,18 +73,58 @@ void destroyQueues(Queue *queues[], int length, void (* destructor)(void *)) {
 }
 
 /**
+ * @brief      Gets the queue size.
+ *
+ * @param      queue  The queue
+ *
+ * @return     The queue size.
+ */
+int getQueueSize(Queue *queue) {
+    return queue->list->size;
+}
+
+/**
+ * @brief      Determines if queue full
+ *
+ * @param      queue  The queue
+ *
+ * @return     True if queue full, False otherwise.
+ */
+bool isQueueFull(Queue *queue) {
+    return (getQueueSize(queue) == queue->maxSize);
+}
+
+/**
+ * @brief      Determines if queue empty.
+ *
+ * @param      queue  The queue
+ *
+ * @return     True if queue empty, False otherwise.
+ */
+bool isQueueEmpty(Queue *queue) {
+    return (getQueueSize(queue) == 0);
+}
+
+/**
+ * @brief      Determines if queue infinity
+ *
+ * @param      queue  The queue
+ *
+ * @return     True if queue infinity, False otherwise.
+ */
+bool isQueueInfinity(Queue *queue) {
+    return (queue->maxSize < 0);
+}
+
+/**
  * @brief      Push a cell on the given queue
  *
  * @param      queue  The queue
  * @param      cell   The cell
  */
 void pushCellOnQueue(Queue *queue, Cell *cell) {
-    if(cell == NULL) {
-        printf("\n\n\n\nQUE PRAGA\n\n\n\n");
-    }
-
-    if (queue->maxSize < 0 || queue->list->size < queue->maxSize) {
-        insertCellOnList(queue->list, cell, queue->list->size);
+    if (isQueueInfinity(queue) || !isQueueFull(queue)) {
+        insertCellOnList(queue->list, cell, getQueueSize(queue));
     }
 }
 
@@ -115,26 +155,28 @@ void printQueues(Queue *queues[], int length, void (* print)(void *)) {
     int i;
 
     for (i = 0; i < length; ++i) {
-        printf("\nQueue %d\n\n", i);
+        printf("\nQueue %d\n", i);
         printQueue(queues[i], print);
     }
 }
 
 /**
  * @brief      Spread the queue's cells on a group of other queues
- * 
- *             This function consumes the queue and pushes the cells on the queues
- *             on the order that they arrive on the queues array.
+ *
+ *             This function consumes the queue and pushes the cells on the
+ *             queues on the order that they arrive on the queues array.
  *
  * @param      queue         The queue to be spreaded
  * @param      queues        The queues group
  * @param[in]  queuesLength  The queues group length
+ * @param[in]  spreadAmount  The amount of cells to spread
  */
-void spreadQueueOnQueues(Queue *queue, Queue *queues[], int queuesLength) {
+void spreadQueueOnQueues(Queue *queue, Queue *queues[], int queuesLength, int spreadAmount) {
     int queuesIndex = 0;
-    while (queue->list->size > 0) {
+    int queueInitialLength = getQueueSize(queue);
+    while (!isQueueEmpty(queue) && queueInitialLength - spreadAmount < getQueueSize(queue)) {
         Cell *aux = popCellFromQueue(queue);
-        pushCellOnQueue(queues[queuesIndex%queuesLength], aux);
+        pushCellOnQueue(queues[queuesIndex % queuesLength], aux);
         queuesIndex++;
     }
 }
@@ -150,7 +192,7 @@ void spreadQueueOnQueues(Queue *queue, Queue *queues[], int queuesLength) {
  * @param[in]  length  The length of the queues array
  */
 void pickCellsfromQueues(Queue *dest, Queue *queues[], int length) {
-    for (int i = 0; i < length; i++) {
+    for (int i = 0; i < length && !isQueueFull(dest); i++) {
         Cell *picked = NULL;
         if( (picked = popCellFromQueue(queues[i])) != NULL) {
             pushCellOnQueue(dest, picked);

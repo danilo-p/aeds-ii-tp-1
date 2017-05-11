@@ -12,4 +12,6 @@ void destroySeed(Seed *seed);
 
 unsigned int createId(Seed *seed);
 
+void printSeed(Seed *seed);
+
 #endif

@@ -1,3 +1,5 @@
+#include <stdbool.h>
+
 #include "list.h"
 #include "cell.h"
 
@@ -26,6 +28,14 @@ void destroyQueue(Queue *queue, void (* destructor)(void *));
 
 void destroyQueues(Queue *queues[], int length, void (* destructor)(void *));
 
+bool isQueueFull(Queue *queue);
+
+bool isQueueEmpty(Queue *queue);
+
+bool isQueueInfinity(Queue *queue);
+
+int getQueueSize(Queue *queue);
+
 void pushCellOnQueue(Queue *queue, Cell *cell);
 
 Cell * popCellFromQueue(Queue *queue);
@@ -34,7 +44,7 @@ void printQueue(Queue *queue, void (* print)(void *));
 
 void printQueues(Queue *queues[], int length, void (* print)(void *));
 
-void spreadQueueOnQueues(Queue *queue, Queue *queues[], int queuesLength);
+void spreadQueueOnQueues(Queue *queue, Queue *queues[], int queuesLength, int spreadAmount);
 
 void pickCellsfromQueues(Queue *dest, Queue *queues[], int length);
 

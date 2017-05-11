@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include <stdlib.h>
 
 #include "seed.h"
@@ -36,4 +37,14 @@ void destroySeed(Seed *seed) {
  */
 unsigned int createId(Seed *seed) {
     return ++seed->counter;
+}
+
+/**
+ * @brief      Prints a seed data
+ *
+ * @param      seed  The seed
+ */
+void printSeed(Seed *seed) {
+    printf("start: %d\n", seed->start);
+    printf("counter: %d\n", seed->counter);
 }

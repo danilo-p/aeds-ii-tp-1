@@ -1,3 +1,5 @@
+#include <stdbool.h>
+
 #include "list.h"
 #include "cell.h"
 
@@ -26,10 +28,20 @@ void destroyStack(Stack *stack, void (* destructor)(void *));
 
 void destroyStacks(Stack *stacks[], int length, void (* destructor)(void *));
 
+bool isStackFull(Stack *stack);
+
+bool isStackEmpty(Stack *stack);
+
+bool isStackInfinity(Stack *stack);
+
 void pushCellOnStack(Stack *stack, Cell *cell);
 
 Cell * popCellFromStack(Stack *stack);
 
 void printStack(Stack *stack, void (* print)(void *));
+
+void printStacks(Stack *stacks[], int length, void (* print)(void *));
+
+void pickCellsfromStacks(Stack *dest, Stack *stacks[], int length);
 
 #endif

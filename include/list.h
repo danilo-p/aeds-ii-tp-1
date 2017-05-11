@@ -19,6 +19,8 @@ typedef struct list List;
 
 List * createList();
 
+void createLists(List *lists[], int length);
+
 void destroyList(List *list, void (* destructor)(void *));
 
 int insertCellOnList(List *list, Cell *cell, int position);

@@ -73,13 +73,46 @@ void destroyStacks(Stack *stacks[], int length, void (* destructor)(void *)) {
 }
 
 /**
+ * @brief      Determines if stack full.
+ *
+ * @param      stack  The stack
+ *
+ * @return     True if stack full, False otherwise.
+ */
+bool isStackFull(Stack *stack) {
+    return (stack->list->size == stack->maxSize);
+}
+
+/**
+ * @brief      Determines if stack empty.
+ *
+ * @param      stack  The stack
+ *
+ * @return     True if stack empty, False otherwise.
+ */
+bool isStackEmpty(Stack *stack) {
+    return (stack->list->size == 0);
+}
+
+/**
+ * @brief      Determines if stack infinity.
+ *
+ * @param      stack  The stack
+ *
+ * @return     True if stack infinity, False otherwise.
+ */
+bool isStackInfinity(Stack *stack) {
+    return (stack->maxSize < 0);
+}
+
+/**
  * @brief      Push a cell on the given stack
  *
  * @param      stack  The stack
  * @param      cell   The cell
  */
 void pushCellOnStack(Stack *stack, Cell *cell) {
-    if (stack->maxSize < 0 || stack->list->size < stack->maxSize) {
+    if (isStackInfinity(stack) || !isStackFull(stack)) {
         insertCellOnList(stack->list, cell, stack->list->size);
     }
 }
@@ -104,5 +137,39 @@ Cell * popCellFromStack(Stack *stack) {
 void printStack(Stack *stack, void (* print)(void *)) {
     if(stack) {
         printList(stack->list, print);
+    }
+}
+
+/**
+ * @brief      Print the given stacks
+ *
+ * @param      stacks  The stacks
+ * @param[in]  length  The length
+ * @param[in]  print   The function for printing the cell data
+ */
+void printStacks(Stack *stacks[], int length, void (* print)(void *)) {
+    int i;
+
+    for (i = 0; i < length; ++i) {
+        printf("\nStack %d\n", i);
+        printStack(stacks[i], print);
+    }
+}
+
+/**
+ * @brief      Pick cells from the given stacks
+ *
+ *             This function pops the cells of stacks and add on the given stack
+ *
+ * @param      dest    The destination
+ * @param      stacks  The stacks array
+ * @param[in]  length  The length of the stacks array
+ */
+void pickCellsfromStacks(Stack *dest, Stack *stacks[], int length) {
+    for (int i = 0; i < length && !isStackFull(dest); i++) {
+        Cell *picked = NULL;
+        if( (picked = popCellFromStack(stacks[i])) != NULL) {
+            pushCellOnStack(dest, picked);
+        }
     }
 }

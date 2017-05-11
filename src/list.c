@@ -22,6 +22,20 @@ List * createList() {
 }
 
 /**
+ * @brief      Create empty lists on the given array
+ *
+ * @param      lists   The lists
+ * @param[in]  length  The length of the lists array
+ */
+void createLists(List *lists[], int length) {
+    int i;
+
+    for(i = 0; i < length; i++) {
+        lists[i] = createList();
+    }
+}
+
+/**
  * @brief      Destroy the given list
  *
  *             Destroy all cells and free the space of the list.
@@ -225,6 +239,8 @@ Cell * removeCellFromList(List *list, int position) {
 void printList(List *list, void (* print)(void *)) {
     int counter = 0;
 
+    printf("%d Cells\n\n", list->size);
+
     if(list) {
         Cell *current = list->first;
 
@@ -233,6 +249,7 @@ void printList(List *list, void (* print)(void *)) {
             printCell(current, print);
             current = current->next;
             counter++;
+            printf("\n");
         }
     }
 }

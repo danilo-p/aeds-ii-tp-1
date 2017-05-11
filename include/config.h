@@ -21,14 +21,20 @@ extern int TRAY_STACK_SIZE;
 extern int TRAY_REFILL_AMOUNT;
 // Intervalo de reposição de bandejas
 extern int TRAY_REFILL_INTERVAL;
+// Tempo gasto para pegar uma bandeja
+extern int TRAY_DELAY;
+// Quantidade de filas para comida
+extern int FOOD_QUEUE_AMOUNT;
+// Quantidade máxima da fila de comidas
+extern int FOOD_QUEUE_SIZE;
+// Quantidade de opções de comida
+extern int FOOD_OPTIONS_AMOUNT;
+// Tempo gasto para servir um tipo de comida
+extern int FOOD_DELAY;
 // Intervalo de chegada de novos usuários
 extern int USER_ARRIVAL_INTERVAL;
 // Quantidade de usuários que chegam a cada intervalo
 extern int USER_REFILL_AMOUNT;
-// Tempo gasto para pegar uma bandeja
-extern int TRAY_DELAY;
-// Tempo gasto para servir um tipo de comida
-extern int FOOD_DELAY;
 // Tempo da simulação
 extern int DURATION;
 
