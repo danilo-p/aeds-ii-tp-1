@@ -11,7 +11,7 @@ CFLAGS += -Wall -I$(INC_DIR) -lm
 
 .PHONY: all docs
 
-all: setup main docs run
+all: setup main run
 
 main: main.o
 	gcc -Wall -lm -o $(BIN_DIR)/main $(SRC) $(OBJ_DIR)/main.o -I$(INC_DIR)
