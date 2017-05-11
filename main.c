@@ -49,13 +49,13 @@ int main() {
         // User arrival
         if (instant % USER_ARRIVAL_INTERVAL == 0) {
             insertNewUsers(checkoutQueues, CHECKOUT_QUEUE_AMOUNT,
-                USER_REFILL_AMOUNT, instant, seed);
+                USER_ARRIVAL_AMOUNT, instant, seed);
         }
 
         // Trays refill
         if (instant % TRAY_REFILL_INTERVAL == 0) {
-            insertNewTrays(trayStacks, TRAY_STACK_AMOUNT, TRAY_REFILL_AMOUNT,
-                instant, seed);
+            insertNewTrays(trayStacks, TRAY_STACK_AMOUNT,
+                TRAY_REFILL_AMOUNT * TRAY_STACK_AMOUNT, instant, seed);
         }
 
         // Checkout service
@@ -67,6 +67,7 @@ int main() {
             pickCellsfromQueues(checkout, checkoutQueues, CHECKOUT_QUEUE_AMOUNT);
         }
 
+
         // Users picking trays
         if (instant % TRAY_DELAY == 0) {
             // The desired amount of trays
@@ -76,14 +77,15 @@ int main() {
             // Remove the used trays from the stacks
             pickCellsfromStacks(usedTrays, trayStacks, TRAY_STACK_AMOUNT);
 
-            // The amount of trays removed
-            int usedTraysAmount = usedTrays->list->size;
+            // The amount of trays removed from the stacks
+            int usedTraysAmount = getStackSize(usedTrays);
 
             // Remove users from traysStation
-            spreadQueueOnQueues(traysStation, foodQueues, FOOD_QUEUE_AMOUNT, usedTraysAmount);
+            spreadQueueOnQueues(traysStation, foodQueues,
+                FOOD_QUEUE_AMOUNT, usedTraysAmount);
 
             // Add the next users from the tray queues to the trays station
-            pickCellsfromQueues(traysStation, trayQueues, TRAY_STACK_AMOUNT);
+            pickCellsfromQueues(traysStation, trayQueues, TRAY_QUEUE_AMOUNT);
 
             destroyStack(usedTrays, destroyTray);
         }
@@ -94,15 +96,20 @@ int main() {
 
             for(i = 0; i < FOOD_QUEUE_AMOUNT; i++) {
                 if (isQueueFull(foodsStation[i])) {
-                    Cell *finishedUser = popCellFromQueue(foodsStation[i]);
+                    Cell *finishedUserCell = popCellFromQueue(foodsStation[i]);
 
-                    ((User *) finishedUser->data)->finishedInstant = instant;
-                    pushCellOnQueue(finishedUsers, finishedUser);
+                    User *finishedUser = (User *) finishedUserCell->data;
+
+                    finishedUser->finishedInstant = instant;
+
+                    pushCellOnQueue(finishedUsers, finishedUserCell);
                 }
 
                 Queue *usersGoingToFoodStation = createQueue(FOOD_QUEUE_AMOUNT);
-                pickCellsfromQueues(usersGoingToFoodStation, foodQueues, FOOD_QUEUE_AMOUNT);
-                spreadQueueOnQueues(usersGoingToFoodStation, foodsStation, FOOD_QUEUE_AMOUNT, getQueueSize(usersGoingToFoodStation));
+                pickCellsfromQueues(usersGoingToFoodStation, foodQueues,
+                    FOOD_QUEUE_AMOUNT);
+                spreadQueueOnQueues(usersGoingToFoodStation, foodsStation,
+                    FOOD_QUEUE_AMOUNT, getQueueSize(usersGoingToFoodStation));
                 destroyQueue(usersGoingToFoodStation, destroyUser);
             }
         }

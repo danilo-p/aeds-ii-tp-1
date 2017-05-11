@@ -34,7 +34,7 @@ extern int FOOD_DELAY;
 // Intervalo de chegada de novos usuários
 extern int USER_ARRIVAL_INTERVAL;
 // Quantidade de usuários que chegam a cada intervalo
-extern int USER_REFILL_AMOUNT;
+extern int USER_ARRIVAL_AMOUNT;
 // Tempo da simulação
 extern int DURATION;
 

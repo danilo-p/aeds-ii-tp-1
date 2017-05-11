@@ -175,7 +175,6 @@ Cell * removeCellFromList(List *list, int position) {
 
     current = list->first;
 
-
     // This loop will search the given position over the list iterating on the
     // cells. Once it arrive to the position, the "current" pointer will be
     // pointing to the cell that is on the given position.

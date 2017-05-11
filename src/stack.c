@@ -167,6 +167,17 @@ void printStacks(Stack *stacks[], int length, void (* print)(void *)) {
     }
 }
 
+
+bool isStacksEmpty(Stack *stacks[], int length) {
+    bool empty = true;
+    for (int i = 0; i < length; ++i) {
+        if(!isStackEmpty(stacks[i])) {
+            empty = false;
+        }
+    }
+    return empty;
+}
+
 /**
  * @brief      Pick cells from the given stacks
  *
@@ -177,10 +188,12 @@ void printStacks(Stack *stacks[], int length, void (* print)(void *)) {
  * @param[in]  length  The length of the stacks array
  */
 void pickCellsfromStacks(Stack *dest, Stack *stacks[], int length) {
-    for (int i = 0; i < length && !isStackFull(dest); i++) {
+    int stackIndex = 0;
+    while (!isStacksEmpty(stacks, length) && !isStackFull(dest)) {
         Cell *picked = NULL;
-        if( (picked = popCellFromStack(stacks[i])) != NULL) {
+        if( (picked = popCellFromStack(stacks[stackIndex%length])) != NULL) {
             pushCellOnStack(dest, picked);
         }
+        stackIndex++;
     }
 }
