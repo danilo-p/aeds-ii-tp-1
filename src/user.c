@@ -70,7 +70,7 @@ void insertNewUsers(Queue *queues[], int length, int newUsersAmount,
 
         int lessUsedQueue = 0;
         for(i = 0; i < length; i++) {
-            if(queues[lessUsedQueue]->list->size > queues[i]->list->size) {
+            if(getQueueSize(queues[lessUsedQueue]) > getQueueSize(queues[i])) {
                 lessUsedQueue = i;
             }
         }
@@ -116,5 +116,5 @@ float getTimeUserSpentAverage(Queue **users, int timeStart) {
 
     *users = aux;
 
-    return (float) sum/aux->list->size;
+    return (float) sum/getQueueSize(aux);
 }

@@ -65,7 +65,7 @@ void insertNewTrays(Stack *stacks[], int length, int newTraysAmount,
         int lessUsedStack = 0;
 
         for(i = 0; i < length; i++) {
-            if(stacks[lessUsedStack]->list->size > stacks[i]->list->size) {
+            if(getStackSize(stacks[lessUsedStack]) > getStackSize(stacks[i])) {
                 lessUsedStack = i;
             }
         }

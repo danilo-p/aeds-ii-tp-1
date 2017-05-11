@@ -73,6 +73,17 @@ void destroyStacks(Stack *stacks[], int length, void (* destructor)(void *)) {
 }
 
 /**
+ * @brief      Gets the stack size.
+ *
+ * @param      stack  The stack
+ *
+ * @return     The stack size.
+ */
+int getStackSize(Stack *stack) {
+    return stack->list->size;
+}
+
+/**
  * @brief      Determines if stack full.
  *
  * @param      stack  The stack
@@ -80,7 +91,7 @@ void destroyStacks(Stack *stacks[], int length, void (* destructor)(void *)) {
  * @return     True if stack full, False otherwise.
  */
 bool isStackFull(Stack *stack) {
-    return (stack->list->size == stack->maxSize);
+    return (getStackSize(stack) == stack->maxSize);
 }
 
 /**
@@ -91,7 +102,7 @@ bool isStackFull(Stack *stack) {
  * @return     True if stack empty, False otherwise.
  */
 bool isStackEmpty(Stack *stack) {
-    return (stack->list->size == 0);
+    return (getStackSize(stack) == 0);
 }
 
 /**
@@ -113,7 +124,7 @@ bool isStackInfinity(Stack *stack) {
  */
 void pushCellOnStack(Stack *stack, Cell *cell) {
     if (isStackInfinity(stack) || !isStackFull(stack)) {
-        insertCellOnList(stack->list, cell, stack->list->size);
+        insertCellOnList(stack->list, cell, getStackSize(stack));
     }
 }
 
@@ -125,7 +136,7 @@ void pushCellOnStack(Stack *stack, Cell *cell) {
  * @return     The popped cell
  */
 Cell * popCellFromStack(Stack *stack) {
-    return removeCellFromList(stack->list, stack->list->size-1);
+    return removeCellFromList(stack->list, getStackSize(stack)-1);
 }
 
 /**

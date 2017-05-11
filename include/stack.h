@@ -28,6 +28,8 @@ void destroyStack(Stack *stack, void (* destructor)(void *));
 
 void destroyStacks(Stack *stacks[], int length, void (* destructor)(void *));
 
+int getStackSize(Stack *stack);
+
 bool isStackFull(Stack *stack);
 
 bool isStackEmpty(Stack *stack);
