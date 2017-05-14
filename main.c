@@ -120,16 +120,18 @@ int main() {
         /* The checkout service. */
         if (instant % CHECKOUT_DELAY == 0) {
             /* Remove users that were attended from the checkout. */
-            spreadQueueOnQueues(checkout, trayQueues, TRAY_QUEUE_AMOUNT, getQueueSize(checkout));
+            spreadQueueOnQueues(checkout, trayQueues, TRAY_QUEUE_AMOUNT,
+                getQueueSize(checkout));
 
             /* Add the next users of the queues on the checkout. */
-            pickCellsfromQueues(checkout, checkoutQueues, CHECKOUT_QUEUE_AMOUNT);
+            pickCellsfromQueues(checkout, checkoutQueues,
+                CHECKOUT_QUEUE_AMOUNT);
         }
-
 
         /* The users picking trays from the stack. */
         if (instant % TRAY_DELAY == 0) {
-            /* The desired amount of trays is the amount of users that will pick trays. */
+            /* The desired amount of trays is the amount of users that will pick
+             * trays. */
             int desiredTraysAmount = getQueueSize(traysStation);
             Stack *usedTrays = createStack(desiredTraysAmount);
 
