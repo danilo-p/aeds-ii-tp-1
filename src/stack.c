@@ -12,6 +12,8 @@
  *             given maxSize. If the maxSize specified is less than 0, the stack
  *             dont have limit.
  *
+ *             Complexity: O(1)
+ *
  * @param[in]  maxSize  The maximum size of the Stack
  *
  * @return     Pointer to the created stack
@@ -27,6 +29,8 @@ Stack * createStack(int maxSize) {
 
 /**
  * @brief      Create empty stacks on the given array
+ * 
+ *             Complexity: O(n)
  *
  * @param      stacks   The stacks array
  * @param[in]  length   The length of the array
@@ -46,6 +50,8 @@ void createStacks(Stack *stacks[], int length, int maxSize) {
  *             Destroy the list of the stack and free the space. Also, destroy
  *             the cells data with the given destructor.
  *
+ *             Complexity: O(n²)
+ *
  * @param      stack       The stack
  * @param[in]  destructor  The destructor
  */
@@ -57,6 +63,9 @@ void destroyStack(Stack *stack, void (* destructor)(void *)) {
 
 /**
  * @brief      Destroy all the stacks from the given array
+ *
+ *             Complexity: O(n³). The loop will execute destroyStack n times,
+ *             that is O(n²).
  *
  * @param      stacks      The stacks array
  * @param[in]  length      The length of the array
@@ -73,6 +82,8 @@ void destroyStacks(Stack *stacks[], int length, void (* destructor)(void *)) {
 /**
  * @brief      Gets the stack size
  *
+ *             Complexity: O(1)
+ *             
  * @param      stack  The stack
  *
  * @return     The stack size.
@@ -83,6 +94,8 @@ int getStackSize(Stack *stack) {
 
 /**
  * @brief      Determines if stack is full
+ *
+ *             Complexity: O(1)
  *
  * @param      stack  The stack
  *
@@ -95,6 +108,8 @@ bool isStackFull(Stack *stack) {
 /**
  * @brief      Determines if stack is empty
  *
+ *             Complexity: O(1)
+ *
  * @param      stack  The stack
  *
  * @return     True if stack empty, False otherwise.
@@ -106,6 +121,8 @@ bool isStackEmpty(Stack *stack) {
 /**
  * @brief      Determines if stack infinity
  *
+ *             Complexity: O(1)
+ *
  * @param      stack  The stack
  *
  * @return     True if stack infinity, False otherwise.
@@ -116,6 +133,8 @@ bool isStackInfinity(Stack *stack) {
 
 /**
  * @brief      Push a cell on the given stack
+ *
+ *             Complexity: O(n)
  *
  * @param      stack  The stack
  * @param      cell   The cell
@@ -129,6 +148,8 @@ void pushCellOnStack(Stack *stack, Cell *cell) {
 /**
  * @brief      Pop a cell from the given stack
  *
+ *             Complexity: O(n)
+ *
  * @param      stack  The stack
  *
  * @return     The popped cell
@@ -139,6 +160,8 @@ Cell * popCellFromStack(Stack *stack) {
 
 /**
  * @brief      Print the given stack
+ *
+ *             Complexity: O(n)
  *
  * @param      stack  The stack
  * @param[in]  print  The function for printing the cell data
@@ -151,6 +174,8 @@ void printStack(Stack *stack, void (* print)(void *)) {
 
 /**
  * @brief      Print the given stacks
+ *
+ *             Complexity: O(n³). It executes printStack n times, that is O(n²).
  *
  * @param      stacks  The stacks
  * @param[in]  length  The length
@@ -168,6 +193,8 @@ void printStacks(Stack *stacks[], int length, void (* print)(void *)) {
 
 /**
  * @brief      Determines if all the stacks of the given array are empty.
+ *
+ *             Complexity: O(n)
  *
  * @param      stacks  The stacks
  * @param[in]  length  The length
@@ -188,6 +215,8 @@ bool isStacksEmpty(Stack *stacks[], int length) {
  * @brief      Pick cells from the given stacks
  *
  *             This function pops the cells of stacks and add on the given stack
+ *
+ *             Complexity: O(n²)
  *
  * @param      dest    The destination
  * @param      stacks  The stacks array

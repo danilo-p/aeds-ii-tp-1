@@ -12,6 +12,8 @@
  *             given maxSize. If the maxSize specified is less than 0, the queue
  *             dont have limit.
  *
+ *             Complexity: O(1)
+ *
  * @param[in]  maxSize  The maximum size of the Queue
  *
  * @return     Pointer to the created queue
@@ -27,6 +29,8 @@ Queue * createQueue(int maxSize) {
 
 /**
  * @brief      Create empty queues on the given array
+ *
+ *             Complexity: O(n)
  *
  * @param      queues   The queues
  * @param[in]  length   The length of the queues array
@@ -46,6 +50,8 @@ void createQueues(Queue *queues[], int length, int maxSize) {
  *             Destroy the list of the queue and free the space. Also, destroy
  *             the cells data with the given destructor.
  *
+ *             Complexity: O(n²)
+ *
  * @param      queue       The queue
  * @param[in]  destructor  The destructor
  */
@@ -57,6 +63,9 @@ void destroyQueue(Queue *queue, void (* destructor)(void *)) {
 
 /**
  * @brief      Destroy all the queues from the given array
+ *
+ *             Complexity: O(n³). The loop will execute destroyQueue n times,
+ *             that is O(n²).
  *
  * @param      queues      The queues array
  * @param[in]  length      The length of the array
@@ -73,6 +82,8 @@ void destroyQueues(Queue *queues[], int length, void (* destructor)(void *)) {
 /**
  * @brief      Gets the queue size.
  *
+ *             Complexity: O(1)
+ *
  * @param      queue  The queue
  *
  * @return     The queue size.
@@ -84,6 +95,8 @@ int getQueueSize(Queue *queue) {
 /**
  * @brief      Determines if queue is full
  *
+ *             Complexity: O(1)
+ *
  * @param      queue  The queue
  *
  * @return     True if queue full, False otherwise.
@@ -94,7 +107,9 @@ bool isQueueFull(Queue *queue) {
 
 /**
  * @brief      Determines if queue is empty
- *             
+ *
+ *             Complexity: O(1)
+ *
  * @param      queue  The queue
  *
  * @return     True if queue empty, False otherwise.
@@ -105,6 +120,8 @@ bool isQueueEmpty(Queue *queue) {
 
 /**
  * @brief      Determines if queue is infinity
+ * 
+ *             Complexity: O(1)
  *
  * @param      queue  The queue
  *
@@ -117,6 +134,8 @@ bool isQueueInfinity(Queue *queue) {
 /**
  * @brief      Push a cell on the given queue
  *
+ *             Complexity: O(n)
+ *
  * @param      queue  The queue
  * @param      cell   The cell
  */
@@ -128,6 +147,8 @@ void pushCellOnQueue(Queue *queue, Cell *cell) {
 
 /**
  * @brief      Pop a cell from the given queue
+ * 
+ *             Complexity: O(n)
  *
  * @param      queue  The queue
  *
@@ -139,6 +160,8 @@ Cell * popCellFromQueue(Queue *queue) {
 
 /**
  * @brief      Print the given queue
+ * 
+ *             Complexity: O(n)
  *
  * @param      queue  The queue
  * @param[in]  print  The function for printing the queue cell's data
@@ -151,6 +174,8 @@ void printQueue(Queue *queue, void (* print)(void *)) {
 
 /**
  * @brief      Print all the queues from the given array
+ *
+ *             Complexity: O(n³). It executes printQueue n times, that is O(n²).
  *
  * @param      queues  The queues
  * @param[in]  length  The length
@@ -171,6 +196,10 @@ void printQueues(Queue *queues[], int length, void (* print)(void *)) {
  *             This function consumes the queue and pushes the cells on the
  *             queues on the order that they arrive on the queues array.
  *
+ *             Complexity: O(n²). In the worst case, this function will consume
+ *             all the queue cells. So the loop will execute n times. The loop
+ *             execute two functions that are both O(n).
+ *
  * @param      queue         The queue to be spreaded
  * @param      queues        The queues group
  * @param[in]  queuesLength  The queues group length
@@ -190,7 +219,9 @@ void spreadQueueOnQueues(Queue *queue, Queue *queues[], int queuesLength, int sp
  * @brief      Pick cells from the given queues
  *
  *             This function pops the first cell of queues and add on the given
- *             queue
+ *             queue.
+ *
+ *             Complexity: O(n²).
  *
  * @param      dest    The destination
  * @param      queues  The queues array

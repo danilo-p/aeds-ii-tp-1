@@ -9,8 +9,10 @@
 /**
  * @brief      Creates an tray.
  *
- * @param[in]  id                 The identifier
- * @param[in]  creationInstant    The creation instant
+ *             Complexity: O(1)
+ *
+ * @param[in]  id               The identifier
+ * @param[in]  creationInstant  The creation instant
  *
  * @return     A pointer to the new tray
  */
@@ -25,6 +27,8 @@ Tray * createTray(unsigned int id, int creationInstant) {
 
 /**
  * @brief      Function for printing tray data
+ * 
+ *             Complexity: O(1)
  *
  * @param      data  The tray in void *
  */
@@ -38,6 +42,8 @@ void printTray(void *data) {
 
 /**
  * @brief      Insert a new tray at the given stack
+ *
+ *             Complexity: O(n)
  *
  * @param      stack    The stack
  * @param      newTray  The new tray

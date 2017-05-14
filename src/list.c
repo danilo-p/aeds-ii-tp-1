@@ -10,6 +10,8 @@
  *             This function create a empty list. The first item and size is set
  *             to NULL and 0, respectively.
  *
+ *             Complexity: O(1)
+ *
  * @return     Returns the pointer to the created list
  */
 List * createList() {
@@ -25,6 +27,8 @@ List * createList() {
  * @brief      Create empty lists on the given array
  *
  *             Useful for creating a lot of new lists.
+ *
+ *             Complexity: O(n)
  *
  * @param      lists   The lists array
  * @param[in]  length  The length of the lists array
@@ -43,6 +47,9 @@ void createLists(List *lists[], int length) {
  *             Destroy all cells and free the space of the list. Pass the
  *             appropriated destructor for the cells data.
  *
+ *             Complexity: O(n²). The loop will execute the removeCellFromList n
+ *             times, that is O(n).
+ *
  * @param      list        The list
  * @param[in]  destructor  The destructor for the cells data
  */
@@ -57,8 +64,10 @@ void destroyList(List *list, void (* destructor)(void *)) {
 
 /**
  * @brief      Calculates the potition.
- *             
+ *
  *             Calculates the position of something based on the size.
+ *
+ *             Complexity: O(1)
  *
  * @param[in]  position  The position
  * @param[in]  size      The size
@@ -90,6 +99,11 @@ int calculatePotition(int position, int size) {
  *
  *             This function will insert a cell in a determined position of the
  *             given list.
+ *
+ *             Complexity: O(n). The relevant part of the code is the while loop
+ *             for seaching the position of the new cell. In the worst case, the
+ *             cell will be inserted on the last position, so the loop will make
+ *             n iterations.
  *
  * @param      list      List to insert the given cell
  * @param      cell      The cell
@@ -162,6 +176,11 @@ int insertCellOnList(List *list, Cell *cell, int position) {
  *
  *             This function will remove a cell in a determined position of the
  *             given list.
+ *
+ *             Complexity: O(n). The relevant part of the code is the while loop
+ *             for seaching the position of the target cell. In the worst case,
+ *             the cell will be removed of the last position, so the loop will
+ *             make n iterations.
  *
  * @param      list      The list
  * @param[in]  position  The position of the cell to be removed
@@ -250,6 +269,8 @@ Cell * removeCellFromList(List *list, int position) {
  *
  *             This function will print the content of a list. It prints the
  *             position and the data of each cell.
+ *             
+ *             Complexity: O(n).
  *
  * @param[in]  list   Pointer to the list
  * @param[in]  print  The function for printing the cell data

@@ -6,8 +6,10 @@
 /**
  * @brief      Creates a new seed
  *
+ *             Complexity: O(1)
+ *
  * @param[in]  start  The start of the count
- *                    
+ *
  * @return     The created seed
  */
 Seed * createSeed(unsigned int start) {
@@ -22,6 +24,8 @@ Seed * createSeed(unsigned int start) {
 /**
  * @brief      Destroy a seed
  *
+ *             Complexity: O(1)
+ *
  * @param      seed  The seed
  */
 void destroySeed(Seed *seed) {
@@ -30,6 +34,8 @@ void destroySeed(Seed *seed) {
 
 /**
  * @brief      Creates an identifier
+ *
+ *             Complexity: O(1)
  *
  * @param[in]  seed  The seed
  *
@@ -41,6 +47,8 @@ unsigned int createId(Seed *seed) {
 
 /**
  * @brief      Prints a seed data
+ * 
+ *             Complexity: O(1)
  *
  * @param      seed  The seed
  */
