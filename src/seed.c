@@ -4,7 +4,7 @@
 #include "seed.h"
 
 /**
- * @brief      Creates a seed.
+ * @brief      Creates a new seed
  *
  * @param[in]  start  The start of the count
  *                    
@@ -29,7 +29,7 @@ void destroySeed(Seed *seed) {
 }
 
 /**
- * @brief      Creates an identifier.
+ * @brief      Creates an identifier
  *
  * @param[in]  seed  The seed
  *

@@ -43,10 +43,8 @@ void createStacks(Stack *stacks[], int length, int maxSize) {
 /**
  * @brief      Destroy the given stack
  *
- *             Destroy the list of the stack and free the space.
- *
- *             Take care while destroying a stack. Remember to set the pointer
- *             to the destroyed stack to NULL to avoid Segmentation Faults.
+ *             Destroy the list of the stack and free the space. Also, destroy
+ *             the cells data with the given destructor.
  *
  * @param      stack       The stack
  * @param[in]  destructor  The destructor
@@ -73,7 +71,7 @@ void destroyStacks(Stack *stacks[], int length, void (* destructor)(void *)) {
 }
 
 /**
- * @brief      Gets the stack size.
+ * @brief      Gets the stack size
  *
  * @param      stack  The stack
  *
@@ -84,7 +82,7 @@ int getStackSize(Stack *stack) {
 }
 
 /**
- * @brief      Determines if stack full.
+ * @brief      Determines if stack is full
  *
  * @param      stack  The stack
  *
@@ -95,7 +93,7 @@ bool isStackFull(Stack *stack) {
 }
 
 /**
- * @brief      Determines if stack empty.
+ * @brief      Determines if stack is empty
  *
  * @param      stack  The stack
  *
@@ -106,7 +104,7 @@ bool isStackEmpty(Stack *stack) {
 }
 
 /**
- * @brief      Determines if stack infinity.
+ * @brief      Determines if stack infinity
  *
  * @param      stack  The stack
  *
@@ -168,6 +166,14 @@ void printStacks(Stack *stacks[], int length, void (* print)(void *)) {
 }
 
 
+/**
+ * @brief      Determines if all the stacks of the given array are empty.
+ *
+ * @param      stacks  The stacks
+ * @param[in]  length  The length
+ *
+ * @return     True if stacks empty, False otherwise.
+ */
 bool isStacksEmpty(Stack *stacks[], int length) {
     bool empty = true;
     for (int i = 0; i < length; ++i) {

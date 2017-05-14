@@ -29,7 +29,7 @@ clean:
 	rm -f $(OBJ_DIR)/* $(BIN_DIR)/*
 
 docs:
-	doxygen
+	doxygen && cd docs/latex && make && cd ../../
 
 valgrind:
 	valgrind --track-origins=yes --leak-check=full --show-leak-kinds=all ./$(BIN_DIR)/main

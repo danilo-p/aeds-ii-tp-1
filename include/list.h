@@ -9,9 +9,9 @@
  *             This will be the structure of the list.
  */
 struct list {
-    /** Pointer to the first item on the list */
+    /** Pointer to the first item on the list. */
     Cell *first;
-    /** Size of the list */
+    /** Used to store the current size of the list. */
     int size;
 };
 

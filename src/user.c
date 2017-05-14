@@ -20,6 +20,7 @@ User * createUser(unsigned int id, int creationInstant) {
 
     newUser->id = id;
     newUser->creationInstant = creationInstant;
+    /** The finishedInstant of a new user is set to the given creationInstant. */
     newUser->finishedInstant = creationInstant;
 
     return newUser;
@@ -36,6 +37,11 @@ void printUser(void *data) {
     printf("(User)\n");
     printf("id: %d\n", user->id);
     printf("creationInstant: %d\n", user->creationInstant);
+    /**
+     * This function only prints the finishedInstant if it is different from the
+     * creationInstant. Being different means that the user is done with the
+     * restaurant services.
+     */
     if(user->finishedInstant != user->creationInstant) {
         printf("finishedInstant: %d\n", user->finishedInstant);
     }
@@ -54,7 +60,7 @@ void insertNewUser(Queue *queue, User *newUser) {
 /**
  * @brief      Insert new users on the queues
  *
- *             Used to insert new users on the checkout queues
+ *             Useful for adding a lot of users on an array of queues.
  *
  * @param      queues           The queues
  * @param[in]  length           The length
@@ -92,6 +98,8 @@ void destroyUser(void *data) {
 
 /**
  * @brief      Gets the time user spent average
+ *
+ *             Used to calculate the average of time spent using the restaurant.
  *
  * @param      users      The users
  * @param[in]  timeStart  The time start

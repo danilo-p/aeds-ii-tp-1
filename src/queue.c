@@ -43,10 +43,8 @@ void createQueues(Queue *queues[], int length, int maxSize) {
 /**
  * @brief      Destroy the given queue
  *
- *             Destroy the list of the queue and free the space.
- *
- *             Take care while destroying a queue. Remember to set the pointer
- *             to the destroyed queue to NULL to avoid Segmentation Faults.
+ *             Destroy the list of the queue and free the space. Also, destroy
+ *             the cells data with the given destructor.
  *
  * @param      queue       The queue
  * @param[in]  destructor  The destructor
@@ -84,7 +82,7 @@ int getQueueSize(Queue *queue) {
 }
 
 /**
- * @brief      Determines if queue full
+ * @brief      Determines if queue is full
  *
  * @param      queue  The queue
  *
@@ -95,8 +93,8 @@ bool isQueueFull(Queue *queue) {
 }
 
 /**
- * @brief      Determines if queue empty.
- *
+ * @brief      Determines if queue is empty
+ *             
  * @param      queue  The queue
  *
  * @return     True if queue empty, False otherwise.
@@ -106,7 +104,7 @@ bool isQueueEmpty(Queue *queue) {
 }
 
 /**
- * @brief      Determines if queue infinity
+ * @brief      Determines if queue is infinity
  *
  * @param      queue  The queue
  *
@@ -151,6 +149,13 @@ void printQueue(Queue *queue, void (* print)(void *)) {
     }
 }
 
+/**
+ * @brief      Print all the queues from the given array
+ *
+ * @param      queues  The queues
+ * @param[in]  length  The length
+ * @param[in]  print   The print
+ */
 void printQueues(Queue *queues[], int length, void (* print)(void *)) {
     int i;
 

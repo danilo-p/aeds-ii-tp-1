@@ -4,10 +4,10 @@
 #include "cell.h"
 
 /**
- * @brief      Create a Cell
+ * @brief      Create a new Cell
  *
- *             This funciton will create a new empty cell. The next item will be
- *             set to NULL and the stored data will be set to 0.
+ *             This funciton will create a new cell. The next item will be set
+ *             to NULL and the stored data will be set to the specified data.
  *
  * @param[in]  data  Pointer to the data
  *
@@ -23,10 +23,10 @@ Cell * createCell(void *data) {
 }
 
 /**
- * @brief      Destroy a cell
+ * @brief      Destroy a Cell
  *
- *             Take care while destroying a cell. Remember to set the pointer to
- *             the destroyed cell to NULL to avoid Segmentation Faults.
+ *             This function destroys the given cell. Pass the appropriated
+ *             destructor for destroying the stored data.
  *
  * @param      cell        The cell
  * @param[in]  destructor  The destructor for the cell data
@@ -39,7 +39,7 @@ void destroyCell(Cell *cell, void (* destructor)(void *)) {
 }
 
 /**
- * @brief      Print the cell
+ * @brief      Print a cell
  *
  * @param      cell   The cell
  * @param[in]  print  The function for printing the cell data

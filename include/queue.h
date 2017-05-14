@@ -12,7 +12,7 @@
  *             This struct stores all the required info for a queue.
  */
 struct queue {
-    /** List that is used to store the queue elements */
+    /** List that is used to store the queue elements. */
     List *list;
     /** Maximum size of the queue. Negative means no maximum size. */
     int maxSize;

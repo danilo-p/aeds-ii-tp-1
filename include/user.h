@@ -4,11 +4,19 @@
 #ifndef USER_H
 #define USER_H
 
-typedef struct user {
+/**
+ * @brief      Structure of a user
+ */
+struct user {
+    /** The user unique identifier */
     unsigned int id;
+    /** The instant that the user was created */
     int creationInstant;
+    /** The instant that the user finalized the restaurant services. */
     int finishedInstant;
-} User;
+};
+
+typedef struct user User;
 
 User * createUser(unsigned int id, int creationInstant);
 

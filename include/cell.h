@@ -4,7 +4,7 @@
 /**
  * @brief      Cell structure
  *
- *             This struct is used on the list as cell.
+ *             Structure for a cell. This is used to implement the linked list.
  */
 struct cell {
     /** Next cell on the list */
