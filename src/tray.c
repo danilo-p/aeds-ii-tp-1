@@ -43,6 +43,7 @@ void printTray(void *data) {
 /**
  * @brief      Insert a new tray at the given stack
  *
+ *             n: the stack length
  *             Complexity: O(n)
  *
  * @param      stack    The stack
@@ -57,8 +58,8 @@ void insertNewTray(Stack *stack, Tray *newTray) {
  *
  *             Used to insert new trays on the stacks
  *
- *             n: length
- *             m: newTraysAmount
+ *             n: the stacks array length
+ *             m: the new trays amount
  *             Complexity: O(mn)
  *
  * @param      stacks           The stacks

@@ -9,6 +9,8 @@
 
 /**
  * @brief      Creates an user.
+ * 
+ *             Complexity: O(1)
  *
  * @param[in]  id               The identifier
  * @param[in]  creationInstant  The creation instant
@@ -28,6 +30,8 @@ User * createUser(unsigned int id, int creationInstant) {
 
 /**
  * @brief      Function for printing user data
+ * 
+ *             Complexity: O(1)
  *
  * @param      data  The user in void *
  */
@@ -49,6 +53,8 @@ void printUser(void *data) {
 
 /**
  * @brief      Insert a new user at the given queue
+ *             n: the queue size
+ *             Complexity: O(n)
  *
  * @param      queue    The queue
  * @param      newUser  The new user
@@ -61,6 +67,10 @@ void insertNewUser(Queue *queue, User *newUser) {
  * @brief      Insert new users on the queues
  *
  *             Useful for adding a lot of users on an array of queues.
+ *
+ *             n: the queues array length
+ *             m: the new users amount
+ *             Complexity: O(mn)
  *
  * @param      queues           The queues
  * @param[in]  length           The length
@@ -88,6 +98,8 @@ void insertNewUsers(Queue *queues[], int length, int newUsersAmount,
 
 /**
  * @brief      Destroys a user
+ * 
+ *             Complexity: O(1)
  *
  * @param      data  The data
  */
@@ -100,6 +112,9 @@ void destroyUser(void *data) {
  * @brief      Gets the time user spent average
  *
  *             Used to calculate the average of time spent using the restaurant.
+ *             
+ *             n: the users queue length
+ *             Complexity: O(n²)
  *
  * @param      users      The users
  * @param[in]  timeStart  The time start

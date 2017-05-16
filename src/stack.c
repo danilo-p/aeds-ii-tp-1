@@ -30,6 +30,7 @@ Stack * createStack(int maxSize) {
 /**
  * @brief      Create empty stacks on the given array
  * 
+ *             n: the stacks array length
  *             Complexity: O(n)
  *
  * @param      stacks   The stacks array
@@ -50,6 +51,7 @@ void createStacks(Stack *stacks[], int length, int maxSize) {
  *             Destroy the list of the stack and free the space. Also, destroy
  *             the cells data with the given destructor.
  *
+ *             n: the stack size
  *             Complexity: O(n²)
  *
  * @param      stack       The stack
@@ -64,8 +66,12 @@ void destroyStack(Stack *stack, void (* destructor)(void *)) {
 /**
  * @brief      Destroy all the stacks from the given array
  *
- *             Complexity: O(n³). The loop will execute destroyStack n times,
- *             that is O(n²).
+ *             n: the stacks array length
+ *             m: the greatest queue size
+ *             Complexity: O(nm²). The loop will execute destroyQueue n times,
+ *             that is O(m²). In the worst case, all the stacks have the same
+ *             size, so we consider here the greatest size found on the stacks
+ *             array.
  *
  * @param      stacks      The stacks array
  * @param[in]  length      The length of the array
@@ -134,6 +140,7 @@ bool isStackInfinity(Stack *stack) {
 /**
  * @brief      Push a cell on the given stack
  *
+ *             n: the stack size
  *             Complexity: O(n)
  *
  * @param      stack  The stack
@@ -148,6 +155,7 @@ void pushCellOnStack(Stack *stack, Cell *cell) {
 /**
  * @brief      Pop a cell from the given stack
  *
+ *             n: the stack size
  *             Complexity: O(n)
  *
  * @param      stack  The stack
@@ -160,7 +168,8 @@ Cell * popCellFromStack(Stack *stack) {
 
 /**
  * @brief      Print the given stack
- *
+ 
+ *             n: the stack size
  *             Complexity: O(n)
  *
  * @param      stack  The stack
@@ -175,7 +184,12 @@ void printStack(Stack *stack, void (* print)(void *)) {
 /**
  * @brief      Print the given stacks
  *
- *             Complexity: O(n³). It executes printStack n times, that is O(n²).
+ *             n: the stacks array length
+ *             m: the greatest queue size
+ *             Complexity: O(nm). The loop will execute printQueue n times,
+ *             that is O(m). In the worst case, all the stacks have the same
+ *             size, so we consider here the greatest size found on the stacks
+ *             array.
  *
  * @param      stacks  The stacks
  * @param[in]  length  The length
@@ -190,10 +204,10 @@ void printStacks(Stack *stacks[], int length, void (* print)(void *)) {
     }
 }
 
-
 /**
  * @brief      Determines if all the stacks of the given array are empty.
  *
+ *             n: the stacks length
  *             Complexity: O(n)
  *
  * @param      stacks  The stacks
@@ -216,7 +230,10 @@ bool isStacksEmpty(Stack *stacks[], int length) {
  *
  *             This function pops the cells of stacks and add on the given stack
  *
- *             Complexity: O(n²)
+ *             n: the length of the stacks array
+ *             m: the length of the dest stack. On the worst case, the dest
+ *             stack is infinity, so the current size have to be considered.
+ *             Complexity: O(mn + n²).
  *
  * @param      dest    The destination
  * @param      stacks  The stacks array

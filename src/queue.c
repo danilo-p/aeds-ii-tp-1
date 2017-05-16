@@ -239,10 +239,9 @@ void spreadQueueOnQueues(Queue *queue, Queue *queues[], int queuesLength, int sp
  *             queue.
  *
  *             n: the length of the queues array
- *             Complexity: O(n*n!). The function will execute n times
- *             pushCellOnQueue, that is O(n). But each time that it call
- *             pushCellOnQueue, the size of the dest queue is increased by 1. On
- *             the worst case, the dest queue will be empty. So we get O(n*n!).
+ *             m: the length of the dest queue. On the worst case, the dest
+ *             queue is infinity, so the current size have to be considered.
+ *             Complexity: O(mn + n²).
  *
  * @param      dest    The destination
  * @param      queues  The queues array
