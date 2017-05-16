@@ -57,6 +57,10 @@ void insertNewTray(Stack *stack, Tray *newTray) {
  *
  *             Used to insert new trays on the stacks
  *
+ *             n: length
+ *             m: newTraysAmount
+ *             Complexity: O(mn)
+ *
  * @param      stacks           The stacks
  * @param[in]  length           The length
  * @param[in]  newTraysAmount   The new trays amount
@@ -87,6 +91,8 @@ void insertNewTrays(Stack *stacks[], int length, int newTraysAmount,
 
 /**
  * @brief      Destroys a tray
+ *
+ *             Complexity: O(1)
  *
  * @param      data  The data
  */

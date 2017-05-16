@@ -30,6 +30,7 @@ Queue * createQueue(int maxSize) {
 /**
  * @brief      Create empty queues on the given array
  *
+ *             n: the queues array length
  *             Complexity: O(n)
  *
  * @param      queues   The queues
@@ -50,6 +51,7 @@ void createQueues(Queue *queues[], int length, int maxSize) {
  *             Destroy the list of the queue and free the space. Also, destroy
  *             the cells data with the given destructor.
  *
+ *             n: the queue size
  *             Complexity: O(n²)
  *
  * @param      queue       The queue
@@ -64,8 +66,12 @@ void destroyQueue(Queue *queue, void (* destructor)(void *)) {
 /**
  * @brief      Destroy all the queues from the given array
  *
- *             Complexity: O(n³). The loop will execute destroyQueue n times,
- *             that is O(n²).
+ *             n: the queues array length
+ *             m: the greatest queue size
+ *             Complexity: O(nm²). The loop will execute destroyQueue n times,
+ *             that is O(m²). In the worst case, all the queues have the same
+ *             size, so we consider here the greatest size found on the queues
+ *             array.
  *
  * @param      queues      The queues array
  * @param[in]  length      The length of the array
@@ -134,6 +140,7 @@ bool isQueueInfinity(Queue *queue) {
 /**
  * @brief      Push a cell on the given queue
  *
+ *             n: the queue size
  *             Complexity: O(n)
  *
  * @param      queue  The queue
@@ -148,7 +155,9 @@ void pushCellOnQueue(Queue *queue, Cell *cell) {
 /**
  * @brief      Pop a cell from the given queue
  * 
- *             Complexity: O(n)
+ *             Complexity: O(1). removeCellFromList complexity is O(n), and n is
+ *             the position that the cell will be inserted. In this case, we are
+ *             inserting cells at the first position, so it will be O(1).
  *
  * @param      queue  The queue
  *
@@ -161,6 +170,7 @@ Cell * popCellFromQueue(Queue *queue) {
 /**
  * @brief      Print the given queue
  * 
+ *             n: the queue size
  *             Complexity: O(n)
  *
  * @param      queue  The queue
@@ -175,7 +185,12 @@ void printQueue(Queue *queue, void (* print)(void *)) {
 /**
  * @brief      Print all the queues from the given array
  *
- *             Complexity: O(n³). It executes printQueue n times, that is O(n²).
+ *             n: the queues array length
+ *             m: the greatest queue size
+ *             Complexity: O(nm). The loop will execute printQueue n times,
+ *             that is O(m). In the worst case, all the queues have the same
+ *             size, so we consider here the greatest size found on the queues
+ *             array.
  *
  * @param      queues  The queues
  * @param[in]  length  The length
@@ -196,9 +211,11 @@ void printQueues(Queue *queues[], int length, void (* print)(void *)) {
  *             This function consumes the queue and pushes the cells on the
  *             queues on the order that they arrive on the queues array.
  *
- *             Complexity: O(n²). In the worst case, this function will consume
+ *             n: the queue size
+ *             m: the greatest queue size on the queues array
+ *             Complexity: O(nm). In the worst case, this function will consume
  *             all the queue cells. So the loop will execute n times. The loop
- *             execute two functions that are both O(n).
+ *             execute pushCellOnQueue n times, that is O(m).
  *
  * @param      queue         The queue to be spreaded
  * @param      queues        The queues group
@@ -221,7 +238,11 @@ void spreadQueueOnQueues(Queue *queue, Queue *queues[], int queuesLength, int sp
  *             This function pops the first cell of queues and add on the given
  *             queue.
  *
- *             Complexity: O(n²).
+ *             n: the length of the queues array
+ *             Complexity: O(n*n!). The function will execute n times
+ *             pushCellOnQueue, that is O(n). But each time that it call
+ *             pushCellOnQueue, the size of the dest queue is increased by 1. On
+ *             the worst case, the dest queue will be empty. So we get O(n*n!).
  *
  * @param      dest    The destination
  * @param      queues  The queues array
